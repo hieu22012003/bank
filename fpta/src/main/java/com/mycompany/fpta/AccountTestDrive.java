@@ -8,17 +8,26 @@ package com.mycompany.fpta;
  *
  * @author Admin
  */
-
+import java.util.*;
 public class AccountTestDrive {
-     public static void main(String[] args) {
-        Account a =new Account("abc","16373",5);
-        a.credit(5);
-        System.out.println("tk a = "+a.balance);
-        a.debit(3);
-        System.out.println("tk a = "+a.balance);
-        Account a2  = new Account("sad","sfdsf",5);
-        a.transTo(a2,1);
-        System.out.println("tk a = "+a.balance);
-        System.out.println("tk a2 = "+a2.balance);
+     public static void mainold2(String[] args){
+        Account myAccount = new Account(1,"Nguyen Trung Hieu",1000000);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("NHap so tien muon rut:");
+        int x = sc.nextInt();
+        if(myAccount.debit(x)){
+            System.out.println("Rut thanh cong "+x);
+        }else{
+            System.out.println("So du tai khoan khong du hoac nhap sai so tien");
+        }
+
+        Account nam = new Account(2,"Pham The Bach",10000);
+        System.out.println("NHap so tien can chuyen khoan:");
+        int y = sc.nextInt();
+        if(myAccount.tranferTo(nam,y)){
+            System.out.println("Chuyen thanh cong sang tai khoan "+nam.getName());
+        }else{
+            System.out.println("Chuyen khoan that bai");
+        }
     }
 }
