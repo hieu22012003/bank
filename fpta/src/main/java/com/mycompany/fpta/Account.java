@@ -7,17 +7,25 @@ package com.mycompany.fpta;
 /**
  *
  * @author Admin
- */
-public class Account {
-    String id;
-    String name;
-    int balance;
+ */public class Account {
+    public int id;
+    public String name;
+    public double balance;
 
-    public String getId() {
+    public Account() {
+    }
+
+    public Account(int id, String name, double balance) {
+        this.id = id;
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -29,49 +37,30 @@ public class Account {
         this.name = name;
     }
 
-    public int getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
-
-
-    public Account() {
+    public boolean credit(int amount){
+        if(amount <= 0) return false;
+        balance += amount;
+        return true;
     }
 
-    public Account(String id, String name, int balance) {
-        this.id = id;
-        this.name = name;
-        this.balance = balance;
+    public boolean debit(int amount){
+        if(amount <= 0 || amount > balance) return false;
+        balance -= amount;
+        return true;
     }
 
-    public void credit(int amount) {
-        if (amount > 0) {
-          int a=this.balance += amount;
-          this.balance= a;
-        }
-
-    }
-
-    public void debit(int amount){
-        if(amount >0 && amount < this.balance){
-          int a =  this.balance -= amount;
-            this.balance = a;
-        } else {
-            System.out.println("Thanh toán không thành công");
-        }
-    }
-
-    public Account transTo(Account a2,int amount){
-        if(this.balance > amount){
-            a2.balance += amount;
-            this.balance -=amount;
-        }else {
-            System.out.println("Chuyển tiền không thành công");
-        }
-        return a2;
+    public boolean tranferTo(Account account,int amount){
+        if(amount <= 0 || amount > balance) return false;
+        account.balance += amount;
+        balance -= amount;
+        return true;
     }
 }
